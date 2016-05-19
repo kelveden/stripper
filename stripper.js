@@ -8,6 +8,7 @@ const stripeSecret = process.env.STRIPE_SK;
 const stripePublic = process.env.STRIPE_PK;
 const stripe = require("stripe")(stripeSecret);
 
+app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -41,8 +42,8 @@ const chargeWithCardDetails = ({ cardNumber, cvc, expiryMonth, expiryYear, amoun
     }, done);
 };
 
-const sendTemplate = (relativePath, res) => {
-    const templatePath = path.normalize(relativePath);
+app.get('/with-token.html', (req, res) => {
+    const templatePath = path.normalize("./templates/with-token.html");
 
     fs.readFile(templatePath, { encoding: "utf8"}, (err, content) => {
         if (err) {
@@ -51,11 +52,7 @@ const sendTemplate = (relativePath, res) => {
             res.send(content.toString("utf8").replace("STRIPE_PK", stripePublic));
         }
     });
-};
-
-app.get('/withtoken', (req, res) => sendTemplate("./public/with-token.html", res));
-app.get('/', (req, res) => sendTemplate("./public/with-token.html", res));
-app.get('/withcard', (req, res) => sendTemplate("./public/with-card.html", res));
+});
 
 app.post('/charge', (req, res) => {
     const body = req.body;

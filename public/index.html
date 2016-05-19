@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stripper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="jumbotron">
+    <div class="col-md-offset-2">
+        <h2>Charge using token</h2>
+        <ul>
+            <li>Does not require PCI compliance.</li>
+            <li>Card details are sent to Stripe's servers via the Stripe javascript API - a token is returned.</li>
+            <li>Card details never reach our server, just the token.</li>
+            <li>Charge is made via the Stripe nodejs API specifying just the token.</li>
+        </ul>
+        <a href="/with-token.html" class="btn btn-primary">Try it</a>
+
+        <h2>Charge using card details</h2>
+        <ul>
+            <li>Requires PCI compliance.</li>
+            <li>Card details are sent directly to our server.</li>
+            <li>Charge is made via the Stripe nodejs API specifying full card details.</li>
+        </ul>
+        <a href="/with-card.html" class="btn btn-primary">Try it</a>
+    </div>
+</div>
+</body>
+</html>
