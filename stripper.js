@@ -41,11 +41,14 @@ app.post('/charge', (req, res) => {
         currency: currency,
         source: token,
         description: "Charge for test@example.com"
-    }, function(err, charge) {
+    }, function(err, stripeResponse) {
         if (err) {
             res.send(err);
         } else {
-            res.send(charge);
+            res.send({
+                request: req.body,
+                response: stripeResponse
+            });
         }
 
     });
