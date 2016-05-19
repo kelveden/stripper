@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stripper</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="jumbotron">
+    <form action="/charge" method="POST" id="payment-form" class="form-horizontal">
+        <div class="form-group">
+            <label for="cardNumber" class="col-md-2 control-label">Card Number</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="cardNumber" name="cardNumber" pattern="[0-9]{16}" value="4242424242424242" title="16 digits; no spaces">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cvc" class="col-md-2 control-label">CVC</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="cvc" name="cvc" value="123" pattern="[0-9]+" title="3 digits">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="expiryMonth" class="col-md-2 control-label">Expiry</label>
+            <div class="col-md-1">
+                <select id="expiryMonth" class="form-control" name="expiryMonth">
+                    <option id="1">1</option>
+                    <option id="2">2</option>
+                    <option id="3">3</option>
+                    <option id="4">4</option>
+                    <option id="5">5</option>
+                    <option id="6">6</option>
+                    <option id="7">7</option>
+                    <option id="8">8</option>
+                    <option id="9">9</option>
+                    <option id="10">10</option>
+                    <option id="11">11</option>
+                    <option id="12" selected>12</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                <select id="expiryYear" class="form-control" name="expiryYear">
+                    <option id="2016">2016</option>
+                    <option id="2017" selected>2017</option>
+                    <option id="2018">2018</option>
+                    <option id="2019">2019</option>
+                    <option id="2020">2020</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="amount" class="col-md-2 control-label">Amount</label>
+            <div class="col-md-1">
+                <input type="text" class="form-control" name="amount" id="amount" value="40" pattern="[0-9]+" title="An integer value">
+            </div>
+            <div class="col-md-1">
+                <input type="text" class="form-control" name="currency" id="currency" value="gbp" pattern="[a-z]{3}" title="3 letter currency code, lower case">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <button type="submit" class="btn btn-primary">Submit Payment</button>
+            </div>
+        </div>
+
+        <div class="col-md-offset-2">
+            <ol>
+                <li>Post the entire form (including card details) to the server.</li>
+                <li>On the server, make call to Stripe API with the provided card details.</li>
+                <li>Output the Stripe response body back to the user in the web page.</li>
+            </ol>
+        </div>
+    </form>
+</div>
+</body>
+</html>
