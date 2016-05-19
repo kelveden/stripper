@@ -31,7 +31,7 @@ app.post('/charge', (req, res) => {
     console.log(req.body);
 
     const token = req.body.stripeToken;
-    const amount = parseFloat(req.body.amount);
+    const amount = parseInt(req.body.amount);
     const currency = req.body.currency;
 
     var stripe = require("stripe")(stripeSecret);
