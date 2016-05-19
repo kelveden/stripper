@@ -78,4 +78,23 @@ app.post('/charge', (req, res) => {
     }
 });
 
+app.get('/transactions', (req, res) => {
+    stripe.balance.listTransactions((err, stripeResponse) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(stripeResponse.data.map((tx) => {
+                return {
+                    type: tx.type,
+                    amount: {
+                        value: (tx.amount / 100) + " " + tx.currency,
+                        fee: (tx.fee / 100) + " " + tx.currency,
+                        net: (tx.net / 100) + " " + tx.currency,
+                    }
+                };
+            }));
+        }
+    });
+});
+
 app.listen(3000);
